@@ -92,6 +92,8 @@ Resultado real (`evidencias/08_persistencia.txt`): 120 registros antes del `down
 
 ### Evidencias
 
+Las capturas de pantalla (`evidencias/*.png`) se tomaron con `bash scripts/demo_capturas.sh`, que recorre cada evidencia en orden. Los logs de texto son:
+
 | Archivo | Qué demuestra |
 |---|---|
 | `evidencias/01_compose_up.txt` | `docker compose up -d --build` levanta los 3 servicios; `db` healthy |
@@ -143,6 +145,8 @@ Dataset: `ventas_125052501.csv`, 5,000,000 registros + encabezado, 336 MB. Máqu
 |---|---|---|---|
 | Hadoop Streaming (`mapper.py` + `reducer.py`) | **12.21 s** | 19.78 s | 0.99 s |
 | Secuencial (`secuencial.py`, línea a línea) | **3.36 s** | 3.32 s | 0.03 s |
+
+En la corrida de la captura `evidencias/05_job_y_tiempos.png` salió Hadoop 11.02 s y secuencial 3.28 s: la proporción se mantiene (~3.4×) entre ejecuciones.
 
 - Contadores del job: `number of splits: 11`, `Map input records=5000001`, `Map output records=5000000` (se descartó el encabezado), `Reduce output records=120` (10 categorías × 12 meses).
 - `diff` entre `output/resultado/part-00000` y `output/secuencial.tsv`: **resultados idénticos (120 filas)**. Log completo en `evidencias/04_job_y_comparativa.log`.

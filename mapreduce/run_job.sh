@@ -3,6 +3,8 @@
 # tiempos y compara los resultados.
 # Uso (desde el host):  docker compose exec -u hadoop hadoop bash run_job.sh
 set -e
+# Todo (logs de Hadoop y salida de "time") por stdout, para que salga en orden
+exec 2>&1
 MATRICULA=125052501
 INPUT=/data/input/ventas_${MATRICULA}.csv
 OUTPUT=/data/output/resultado
