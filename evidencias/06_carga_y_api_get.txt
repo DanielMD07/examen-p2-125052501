@@ -1,0 +1,55 @@
+$ docker compose exec api python scripts/cargar_resultados.py
+Cargados 120 registros desde 1 archivo(s). Filas en ingresos_categoria_mes: 120
+
+$ curl -s localhost:8000/resultados | head
+120 registros
+[
+  {
+    "id": 1,
+    "categoria": "Abarrotes",
+    "mes": "2025-01",
+    "ingreso": 346079563.69
+  },
+  {
+    "id": 2,
+    "categoria": "Abarrotes",
+    "mes": "2025-02",
+    "ingreso": 317343416.45
+  },
+  {
+    "id": 3,
+    "categoria": "Abarrotes",
+    "mes": "2025-03",
+    "ingreso": 343628131.91
+  }
+]
+
+$ curl -s localhost:8000/resultados/Electronica
+[
+    {
+        "id": 37,
+        "categoria": "Electronica",
+        "mes": "2025-01",
+        "ingreso": 344798803.92
+    },
+    {
+        "id": 38,
+        "categoria": "Electronica",
+        "mes": "2025-02",
+        "ingreso": 312521605.34
+    },
+    {
+        "id": 39,
+        "categoria": "Electronica",
+        "mes": "2025-03",
+        "ingreso": 341035886.19
+    },
+    {
+...
+
+$ curl -s "localhost:8000/resultados/Electronica?mes=2025-03"
+[{"id":39,"categoria":"Electronica","mes":"2025-03","ingreso":341035886.19}]
+
+$ curl -s localhost:8000/resultados/NoExiste
+{"error":"sin resultados para 'NoExiste'"}
+ [HTTP 404]

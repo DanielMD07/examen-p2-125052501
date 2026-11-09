@@ -1,0 +1,59 @@
+services:
+  hadoop:
+    build: ./hadoop
+    container_name: examen-hadoop
+    hostname: hadoop
+    volumes:
+      # Dataset: solo lectura
+      - ./data:/data/input:ro
+      # Salida del job (la lee scripts/cargar_resultados.py)
+      - ./output:/data/output
+      # mapper.py, reducer.py y secuencial.py
+      - ./mapreduce:/opt/mapreduce
+      # Par de llaves ssh compartido con la api
+      - ssh_keys:/keys
+    networks:
+      - datamart-net
+
+  db:
+    image: mysql:8.4
+    container_name: examen-db
+    env_file: .env
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -p$$MYSQL_ROOT_PASSWORD --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+    networks:
+      - datamart-net
+
+  api:
+    build: ./api
+    container_name: examen-api
+    env_file: .env
+    environment:
+      DB_HOST: db
+      DB_PORT: "3306"
+    ports:
+      - "${API_PORT:-8000}:8000"
+    volumes:
+      - ./output:/data/output:ro
+      - ./scripts:/app/scripts:ro
+      - ssh_keys:/keys:ro
+    depends_on:
+      db:
+        condition: service_healthy
+      hadoop:
+        condition: service_started
+    networks:
+      - datamart-net
+
+volumes:
+  db_data:
+  ssh_keys:
+
+networks:
+  datamart-net:
+    driver: bridge

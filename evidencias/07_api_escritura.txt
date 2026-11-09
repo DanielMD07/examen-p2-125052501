@@ -1,0 +1,21 @@
+$ curl -X POST localhost:8000/resultados -d {"categoria":"Prueba","mes":"2026-01","ingreso":123.45}
+{"id":121,"categoria":"Prueba","mes":"2026-01","ingreso":123.45}
+ [HTTP 201]
+$ curl -X POST (duplicado)
+{"error":"ya existe un registro para esa categoria y mes"}
+ [HTTP 409]
+$ curl -X POST (mes invalido)
+{"error":"mes debe tener formato YYYY-MM"}
+ [HTTP 400]
+$ curl -X PUT localhost:8000/resultados/121 -d {"ingreso":999.99}
+{"id":121,"categoria":"Prueba","mes":"2026-01","ingreso":999.99}
+ [HTTP 200]
+$ curl localhost:8000/resultados/Prueba
+[{"id":121,"categoria":"Prueba","mes":"2026-01","ingreso":999.99}]
+ [HTTP 200]
+$ curl -X DELETE localhost:8000/resultados/121
+{"mensaje":"registro 121 eliminado"}
+ [HTTP 200]
+$ curl localhost:8000/resultados/Prueba
+{"error":"sin resultados para 'Prueba'"}
+ [HTTP 404]

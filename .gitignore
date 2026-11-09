@@ -1,0 +1,16 @@
+# Dataset (~400 MB): NO se sube
+*.csv
+*.tar.gz
+data/*
+!data/.gitkeep
+
+# Credenciales
+.env
+
+# Salida del job MapReduce
+output/*
+!output/.gitkeep
+
+__pycache__/
+*.pyc
+.venv/

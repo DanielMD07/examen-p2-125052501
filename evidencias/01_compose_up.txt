@@ -1,0 +1,10 @@
+ Container examen-db Started 
+ Container examen-hadoop Started 
+ Container examen-db Waiting 
+ Container examen-db Healthy 
+ Container examen-api Starting 
+ Container examen-api Started 
+NAME            IMAGE                        COMMAND                  SERVICE   CREATED          STATUS                    PORTS
+examen-api      examen-p2-125052501-api      "python app.py"          api       26 seconds ago   Up 5 seconds              0.0.0.0:8000->8000/tcp, [::]:8000->8000/tcp
+examen-db       mysql:8.4                    "docker-entrypoint.s…"   db        26 seconds ago   Up 25 seconds (healthy)   3306/tcp, 33060/tcp
+examen-hadoop   examen-p2-125052501-hadoop   "/entrypoint.sh"         hadoop    26 seconds ago   Up 25 seconds             22/tcp

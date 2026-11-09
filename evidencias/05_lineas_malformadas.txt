@@ -1,0 +1,14 @@
+		Map input records=1004
+		Map output records=999
+	DataMart
+		LineasMalFormadas=4
+		IO_ERROR=0
+2026-11-09 15:39:56,180 INFO mapreduce.Job: Job job_local1996286666_0001 completed successfully
+		Map input records=1004
+		Map output records=999
+	DataMart
+		LineasMalFormadas=4
+		IO_ERROR=0
+Abarrotes	2025-01	104166.35
+Abarrotes	2025-02	39318.20
+Abarrotes	2025-03	75409.99

@@ -1,0 +1,18 @@
+$ docker compose exec hadoop java -version
+openjdk version "17.0.21" 2026-10-20
+OpenJDK Runtime Environment (build 17.0.21+9-1-deb12u1-Debian)
+OpenJDK 64-Bit Server VM (build 17.0.21+9-1-deb12u1-Debian, mixed mode, sharing)
+
+$ docker compose exec hadoop hadoop version
+Hadoop 3.3.6
+Source code repository https://github.com/apache/hadoop.git -r 1be78238728da9266a4f88195058f08fd012bf9c
+Compiled by ubuntu on 2023-06-18T08:22Z
+Compiled on platform linux-x86_64
+Compiled with protoc 3.7.1
+From source with checksum 5652179ad55f76cb287d9c633bb53bbd
+This command was run using /opt/hadoop-3.3.6/share/hadoop/common/hadoop-common-3.3.6.jar
+
+$ docker compose exec hadoop bash -c "echo \$JAVA_HOME; echo \$HADOOP_HOME; echo \$PATH"
+/usr/lib/jvm/java-17-openjdk-amd64
+/opt/hadoop
+/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/hadoop/bin:/opt/hadoop/sbin

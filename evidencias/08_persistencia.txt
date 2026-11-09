@@ -1,0 +1,38 @@
+$ curl localhost:8000/resultados  (antes)
+120 registros en /resultados
+$ docker compose down
+ Container examen-api Removed 
+ Container examen-db Removed 
+ Container examen-hadoop Removed 
+ Network examen-p2-125052501_datamart-net Removed 
+$ docker volume ls | grep db_data
+local     examen-p2-125052501_db_data
+$ docker compose up -d
+ Container examen-hadoop Started 
+ Container examen-db Started 
+ Container examen-db Healthy 
+ Container examen-api Started 
+$ curl localhost:8000/resultados  (despues de down/up)
+120 registros en /resultados
+
+===== down -v (borra el volumen) =====
+$ docker compose down -v
+ Container examen-api Removed 
+ Container examen-db Removed 
+ Container examen-hadoop Removed 
+ Volume examen-p2-125052501_ssh_keys Removing 
+ Volume examen-p2-125052501_db_data Removing 
+ Volume examen-p2-125052501_ssh_keys Removed 
+ Volume examen-p2-125052501_db_data Removed 
+ Network examen-p2-125052501_datamart-net Removed 
+$ docker compose up -d
+ Container examen-hadoop Started 
+ Container examen-db Started 
+ Container examen-db Healthy 
+ Container examen-api Started 
+$ curl localhost:8000/resultados  (tabla vacia)
+0 registros en /resultados
+$ docker compose exec api python scripts/cargar_resultados.py
+Cargados 120 registros desde 1 archivo(s). Filas en ingresos_categoria_mes: 120
+$ curl localhost:8000/resultados
+120 registros en /resultados
